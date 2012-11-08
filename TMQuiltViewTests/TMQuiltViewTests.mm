@@ -49,7 +49,7 @@ describe(@"A TMQuiltView", ^{
         });
         
         it(@"should have an empty frame", ^(void) {
-            quiltView.frame.origin.x should equal(1);
+            quiltView.frame.origin.x should equal(0);
             quiltView.frame.origin.y should equal(0);
             quiltView.frame.size.width should equal(0);
             quiltView.frame.size.height should equal(0);
@@ -74,7 +74,6 @@ describe(@"A TMQuiltView", ^{
             it(@"should return nil if the index path is out of range", ^{
                 
                 [quiltView  cellAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_nil;
-                @throw @"hehe";
             });
             
         });
