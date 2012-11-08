@@ -74,7 +74,7 @@ describe(@"A TMQuiltView", ^{
             it(@"should return nil if the index path is out of range", ^{
                 
                 [quiltView  cellAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] should be_nil;
-                @throw @"hehe"
+                @throw @"hehe";
             });
             
         });
