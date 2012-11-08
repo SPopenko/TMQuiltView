@@ -49,7 +49,7 @@ describe(@"A TMQuiltView", ^{
         });
         
         it(@"should have an empty frame", ^(void) {
-            quiltView.frame.origin.x should equal(0);
+            quiltView.frame.origin.x should equal(1);
             quiltView.frame.origin.y should equal(0);
             quiltView.frame.size.width should equal(0);
             quiltView.frame.size.height should equal(0);
