@@ -24,16 +24,6 @@
 		15F3E26A15B9FABE00218C9C /* TMQuiltViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F3E26815B9FABE00218C9C /* TMQuiltViewController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E42EC06E164BB0190059977E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 15F3E21915B9DC6800218C9C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 15F3E22115B9DC6900218C9C;
-			remoteInfo = TMQuiltView;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		15E459FD15C071310031094D /* TMQuiltViewTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMQuiltViewTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15E459FF15C071310031094D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -177,7 +167,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E42EC06F164BB0190059977E /* PBXTargetDependency */,
 			);
 			name = TMQuiltViewTests;
 			productName = TMQuiltViewTests;
@@ -262,14 +251,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		E42EC06F164BB0190059977E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 15F3E22115B9DC6900218C9C /* TMQuiltView */;
-			targetProxy = E42EC06E164BB0190059977E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		15E45A0715C071310031094D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -296,13 +277,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMQuiltViewTests/TMQuiltViewTests-Prefix.pch";
 				INFOPLIST_FILE = "TMQuiltViewTests/TMQuiltViewTests-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 i386";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -321,6 +303,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMQuiltViewTests/TMQuiltViewTests-Prefix.pch";
 				INFOPLIST_FILE = "TMQuiltViewTests/TMQuiltViewTests-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -328,7 +311,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 i386";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -353,6 +336,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -370,6 +354,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
@@ -382,6 +367,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -394,6 +380,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
