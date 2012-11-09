@@ -184,7 +184,7 @@ NSString *const kDefaultReusableIdentifier = @"kTMQuiltViewDefaultReusableIdenti
 
 - (NSMutableDictionary **)indexPathToViewByColumn {
     if (!_indexPathToViewByColumn) {
-        _indexPathToViewByColumn = malloc(sizeof(NSMutableSet*) * _numberOfColumms);
+        _indexPathToViewByColumn = malloc(sizeof(NSMutableDictionary*) * _numberOfColumms);
         for (int i = 0; i < _numberOfColumms; i++) {
             _indexPathToViewByColumn[i] = [[NSMutableDictionary alloc] init];
         }
