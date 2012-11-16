@@ -163,7 +163,7 @@
 				15E459F915C071310031094D /* Sources */,
 				15E459FA15C071310031094D /* Frameworks */,
 				15E459FB15C071310031094D /* Resources */,
-				E4625AAA165631BE0002DF5C /* ShellScript */,
+				E4625AB016563B250002DF5C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -229,7 +229,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E4625AAA165631BE0002DF5C /* ShellScript */ = {
+		E4625AB016563B250002DF5C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -239,8 +239,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/sh ./scripts/plist_edit";
-			shellScript = "";
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n# by Andreas Monitzer (@anlumo1) and Pepi Zawodsky (@MacLemon)\n#\n# This script published under WTF license\n# http://en.wikipedia.org/wiki/WTFPL\n# Improvements to this script are welcome though.\n\n# Augments the Info.plist with a lot of nice stuff.\n# It's suggested to call this script from a \"run script\" build phase, not copy the script's contents there.\n\n# All Values are available from Objective-C like this:\n# Example\n# NSDictionary *infoPList = [[NSBundle mainBundle] infoDictionary];\n# NSLog(@\"CFBundleShortVersionString: %@\", [infoPList objectForKey:@\"CFBundleShortVersionString\"]);\n\necho \"Checking for file ${PROJECT_DIR}/.git\"\n\n# When using git SCM\nif [ -e \"${PROJECT_DIR}/../.git\" ]\nthen\n\n# Get a svn-like revision number that keeps increasing with every commit.\nREV=$(git log --pretty=format:'' | wc -l | sed 's/[ \\t]//g')\necho \"git rev: $REV\"\n\n# Getting the current branch\nGITBRANCH=$(git branch | grep \"*\" | sed -e 's/^* //')\necho \"Git Branch: $GITBRANCH\"\n# To prevent local builds from displaying incorrent branches we need to delete and readd.\n/usr/libexec/PlistBuddy -c \"Delete :GitBranch string\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n/usr/libexec/PlistBuddy -c \"Add :GitBranch string $GITBRANCH\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# full build hash\nGITHASH=$(git rev-parse HEAD)\necho \"Git Hash: $GITHASH\"\n/usr/libexec/PlistBuddy -c \"Delete :GitHash string\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n/usr/libexec/PlistBuddy -c \"Add :GitHash string $GITHASH\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# commonly used short hash\nGITHASHSHORT=$(git rev-parse --short HEAD)\necho \"Git Hash Short: $GITHASHSHORT\"\n/usr/libexec/PlistBuddy -c \"Delete :GitShortHash string\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n/usr/libexec/PlistBuddy -c \"Add :GitShortHash string $GITHASHSHORT\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# parsing tags to build the CFBundleVersion in the form of <MAJOR>.<MINOR>.<PATCH>.<REV>\n# Parts of the version number that are missing are substituted with zeros.\nNEAREST=$(git describe --abbrev=0 --match \"release_[0-9]*\")\necho \"Nearest release Tag: \\\"$NEAREST\\\"\"\n\nMAJOR=\"0\"\nMINOR=\"0\"\nPATCH=\"0\"\nif [ \"$NEAREST\" == \"\" ]\nthen\necho \"No release tag found!\"\nelse\nMAJOR=$(echo $NEAREST | cut -d \"_\" -f 2)\nif [ $MAJOR == \"\" ]\nthen\nMAJOR=\"0\"\nelse\nMINOR=$(echo $NEAREST | cut -d \"_\" -f 3)\nif [ $MINOR == \"\" ]\nthen\nMINOR=\"0\"\nelse\nPATCH=$(echo $NEAREST | cut -d \"_\" -f 4)\nif [ $PATCH == \"\" ]\nthen\nPATCH=\"0\"\nfi\nfi\nfi\nfi\n\necho \"Version String: $MAJOR.$MINOR.$PATCH.$REV\"\n\n# Setting in the Info.plist file\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $MAJOR.$MINOR.$PATCH.$REV\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $MAJOR.$MINOR.$PATCH.$REV ($GITHASHSHORT)\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# Setting the same version number in the .dSYM file needed for symbolication in the Hockeyapp.net webinterface\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $MAJOR.$MINOR.$PATCH.$REV\" \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $MAJOR.$MINOR.$PATCH.$REV ($GITHASHSHORT)\" \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\nelif [ -e \"${PROJECT_DIR}/../.svn\" ]\nthen\n# Support for SVN would be happy if you'd actually implement it!\nREV=$(svnversion -nc \"${PROJECT_DIR}\" | sed -e 's/^[^:]*://;s/[A-Za-z]//')\necho -n \"SVN rev: $REV\"\nfi\n\nif [ \"$BUILD_NUMBER\" == \"\" ]\nthen\n/usr/libexec/PlistBuddy -c \"Delete :JenkinsBuild string\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n/usr/libexec/PlistBuddy -c \"Add :JenkinsBuild string $BUILD_NUMBER\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nelse\n/usr/libexec/PlistBuddy -c \"Delete :JenkinsBuild string\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n/usr/libexec/PlistBuddy -c \"Add :JenkinsBuild string Local build (not via Jenkins)\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi\n\n#EOF";
 		};
 /* End PBXShellScriptBuildPhase section */
 
