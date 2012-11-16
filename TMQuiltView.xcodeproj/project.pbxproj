@@ -163,6 +163,7 @@
 				15E459F915C071310031094D /* Sources */,
 				15E459FA15C071310031094D /* Frameworks */,
 				15E459FB15C071310031094D /* Resources */,
+				E4625AAA165631BE0002DF5C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -226,6 +227,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E4625AAA165631BE0002DF5C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/bin/sh ./scripts/plist_edit";
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		15E459F915C071310031094D /* Sources */ = {
